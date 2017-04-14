@@ -248,7 +248,7 @@ class MapContainer extends Component {
     if (this.state.currentAnnotationsSwath !== null) {
       annotations.push({...this.state.currentAnnotationsSwath});
     }
-    console.log(annotations.length);
+    
     let trackingButton;
     let trackingButtonClass = 'tracking-button';
     if (this._isTracking()) {

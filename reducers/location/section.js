@@ -62,7 +62,8 @@ export class Section {
     boom_size: number;
     line: LineString;
 
-    constructor(config: SectionConfig = {}) {
+    constructor(config: SectionConfig) {
+
         this.id = config.id || uuid.v4();
         this.index =  isNumber(config.index) ? config.index : null;
         this.startTime = config.startTime || new Date();

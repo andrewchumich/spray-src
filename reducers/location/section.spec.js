@@ -8,6 +8,8 @@ test('Section Class should throw error with no chemical id', () => {
         endTime: new Date(),
         county_id: 0,
         boom: 'BOTH',
+        user_id: 0,
+        group_id: 1,
     };
 
     expect(() => {
@@ -21,6 +23,8 @@ test('Section Class should throw error with no county id', () => {
         endTime: new Date(),
         chemical_id: 0,
         boom: 'BOTH',
+        user_id: 0,
+        group_id: 1,
     };
 
     expect(() => {
@@ -34,6 +38,8 @@ test('Section Class should throw error with no county id', () => {
         endTime: new Date(),
         chemical_id: 0,
         county_id: 0,
+        user_id: 0,
+        group_id: 1,
     };
 
     expect(() => {
@@ -51,6 +57,8 @@ test('Section Class should not throw error on good config', () => {
         weed_ids: [],
         boom: 'BOTH',
         boom_size: 0,
+        user_id: 0,
+        group_id: 1,
     };
 
     expect(() => {
@@ -67,6 +75,8 @@ test('Section Class should be able to set end time', () => {
         weed_ids: [],
         boom: 'BOTH',
         boom_size: 0,
+        user_id: 0,
+        group_id: 1,
     };
 
     let s = new Section(section_config);
@@ -87,6 +97,8 @@ test('Section Class should be able to add position', () => {
         weed_ids: [],
         boom: 'BOTH',
         boom_size: 0,
+        user_id: 0,
+        group_id: 1,
     };
 
     let s = new Section(section_config);
@@ -107,6 +119,8 @@ test('Section Class should generate uuid', () => {
         weed_ids: [],
         boom: 'BOTH',
         boom_size: 0,
+        user_id: 0,
+        group_id: 1,
     };
 
     let s = new Section(section_config);

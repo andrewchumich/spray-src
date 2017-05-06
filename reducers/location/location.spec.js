@@ -22,6 +22,8 @@ test('should be able to create section', () => {
         weed_ids: [1, 2],
         boom: 'BOTH',
         boom_size: 15,
+        user_id: 0,
+        group_id: 1,
     };
     const today = getToday();
     const after_start_spray_state = locationReducer(test_initial_state, startSpraying(spray_state));
@@ -42,6 +44,8 @@ test('when setting location while spraying, should append to current section', (
         weed_ids: [1, 2],
         boom: 'BOTH',
         boom_size: 15,
+        user_id: 0,
+        group_id: 1,
     };
     const today = getToday();
     const after_start_spray_state = locationReducer(test_initial_state, startSpraying(spray_state));
@@ -69,6 +73,8 @@ test('should be able to stop spraying', () => {
         weed_ids: [1, 2],
         boom: 'BOTH',
         boom_size: 15,
+        user_id: 0,
+        group_id: 1,
     };
     const today = getToday();
     const after_start_spray_state = locationReducer(test_initial_state, startSpraying(spray_state));
@@ -98,6 +104,8 @@ test('shouldnt add section if no locations', () => {
       weed_ids: [1, 2],
       boom: 'BOTH',
       boom_size: 15,
+      user_id: 0,
+      group_id: 1,
   };
   const today = getToday();
   const after_start_spray_state = locationReducer(test_initial_state, startSpraying(spray_state));
@@ -132,6 +140,8 @@ test('when setting location while spraying, should set index to selection', () =
         weed_ids: [1, 2],
         boom: 'BOTH',
         boom_size: 15,
+        user_id: 0,
+        group_id: 1,
     };
     const today = getToday();
     const after_start_spray_state = locationReducer(test_initial_state, startSpraying(spray_state));

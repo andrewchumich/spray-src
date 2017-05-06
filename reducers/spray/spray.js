@@ -41,7 +41,7 @@ export function sprayReducer(state:SprayState=initialState, action: Action) {
     case SET_SPRAY:
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
       };
     case START_SPRAYING:
       return {

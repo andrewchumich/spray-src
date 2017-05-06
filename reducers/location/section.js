@@ -9,6 +9,7 @@ import { isNumber } from 'lodash';
 
 export type SectionConfig = {
     id?: string,
+    _id?: number,
     index?: number,
     startTime?: Date,
     endTime?: Date,
@@ -25,6 +26,8 @@ export type SectionConfig = {
     boom?: BoomOrientation,
     boom_size?: number,
     line?: LineString,
+    user_id: number,
+    group_id: number,
 };
 
 export const REQUIRED_KEYS = [
@@ -34,6 +37,8 @@ export const REQUIRED_KEYS = [
     'weed_ids',
     'boom',
     'boom_size',
+    'user_id',
+    'group_id',
 ];
 export const isValidSectionConfig = (config: SectionConfig): boolean => {
     return REQUIRED_KEYS.every((k) => k in config);
@@ -42,8 +47,10 @@ export const isValidSectionConfig = (config: SectionConfig): boolean => {
 export class Section {
 
     id: string;
+    _id: number;
     /**
-     * This number should match its index in LocationState.list[date]
+     * This number should match its index in LocationState.list[date],
+     * but not sure if necessary
      */
     index: ?number;
     startTime: Date;
@@ -61,6 +68,8 @@ export class Section {
     boom: BoomOrientation;
     boom_size: number;
     line: LineString;
+    user_id: number;
+    group_id: number;
 
     constructor(config: SectionConfig) {
 
@@ -97,6 +106,16 @@ export class Section {
             throw new TypeError('Section class requires boom_size orientation');
         } else {
             this.boom_size = config.boom_size;
+        }
+        if (!config.hasOwnProperty('group_id') || config.group_id === null) {
+            throw new TypeError('Section class requires group_id orientation');
+        } else {
+            this.group_id = config.group_id;
+        }
+        if (!config.hasOwnProperty('user_id') || config.user_id === null) {
+            throw new TypeError('Section class requires user_id orientation');
+        } else {
+            this.user_id = config.user_id;
         }
 
         this.line = config.line || { coordinates: [] };

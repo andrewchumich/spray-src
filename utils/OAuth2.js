@@ -35,12 +35,15 @@ function tokenIsValid(t: ?Token) {
 
 export const OAuth2 = {
   getFormData: function(data: any) {
-    var formData = new FormData();
-
-    for (var k in data) {
-        formData.append(k, data[k]);
-    }
-    return formData;
+    return Object.keys(data).map((key) => {
+      return encodeURIComponent(key) + '=' + encodeURIComponent(data[key])
+    }).join('&');
+    // var formData = new FormData();
+    //
+    // for (var k in data) {
+    //     formData.append(k, data[k]);
+    // }
+    // return formData;
   },
   getToken: function(config: LoginConfig) {
     return new Promise((resolve, reject) => {
@@ -51,7 +54,7 @@ export const OAuth2 = {
         return fetch(URL, {
           method: 'POST',
           headers: {
-            'Accept': 'application/x-www-form-urlencoded',
+            'Accept': 'application/json',
             'Content-Type': 'application/x-www-form-urlencoded',
           },
           body: this.getFormData({
@@ -62,7 +65,10 @@ export const OAuth2 = {
           (res) => {
             resolve(setToken(res));
           },
-          (err) => reject(err)
+          (err) => {
+            console.log(err);
+            reject(err)
+          }
         );
       }
     });

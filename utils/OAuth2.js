@@ -38,12 +38,6 @@ export const OAuth2 = {
     return Object.keys(data).map((key) => {
       return encodeURIComponent(key) + '=' + encodeURIComponent(data[key])
     }).join('&');
-    // var formData = new FormData();
-    //
-    // for (var k in data) {
-    //     formData.append(k, data[k]);
-    // }
-    // return formData;
   },
   getToken: function(config: LoginConfig) {
     return new Promise((resolve, reject) => {
@@ -61,13 +55,15 @@ export const OAuth2 = {
             ...BASE_CONFIG,
             ...config,
           }),
-        }).then((res) => res.json()).then(
+        }).then((res) => {
+          return res.json()
+        }).then(
           (res) => {
             resolve(setToken(res));
           },
           (err) => {
             console.log(err);
-            reject(err)
+            reject(err);
           }
         );
       }

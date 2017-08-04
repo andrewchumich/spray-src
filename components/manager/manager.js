@@ -45,20 +45,20 @@ class ManagerContainer extends Component {
     const { name, index, location } = this.props;
     const days_list = Object.keys(location.list).sort().reverse();
 
-    let days_list_component = '';
+    let days_list_component = (<List></List>);
     if (days_list.length > 0) {
       const days_list_items = days_list.map((day) => {
         const sections: Section[] = location.list[day];
         return (
           <ListItem key={day} onPress={ () => this._onPressDayButton(sections) }>
-            <Text>{day} : { sections.length } </Text>
+            <Text>{day} : { sections.length }</Text>
           </ListItem >
         );
       });
       days_list_component = (
-        <List >
+        <List>
           { days_list_items }
-        </List >
+        </List>
       );
     }
 
@@ -86,8 +86,8 @@ class ManagerContainer extends Component {
           { days_list_component }
         </Content>
       </Container>
-    );
-  }
+);
+}
 }
 
 function bindAction(dispatch) {

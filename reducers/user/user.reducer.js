@@ -1,6 +1,6 @@
 /* @flow */
 
-import { User } from './user';
+import { User,  } from './user';
 import type { LoginConfig } from './user.service';
 
 // actions
@@ -41,10 +41,10 @@ export function loginRequested(user: LoginConfig): UserAction {
   };
 }
 
-export function loginSucceeded(): UserAction {
+export function loginSucceeded(user: User): UserAction {
   return {
     type: LOGIN_SUCCEEDED,
-    payload: undefined,
+    payload: user,
   };
 }
 

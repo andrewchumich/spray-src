@@ -26,6 +26,7 @@ class MapContainer extends Component {
     name: React.PropTypes.string,
     location: React.PropTypes.shape(LocationPropTypes),
     spray: React.PropTypes.shape(SprayPropTypes),
+    user: React.PropTypes.object,
     openDrawer: React.PropTypes.func,
     setLocation: React.PropTypes.func,
     setSpray: React.PropTypes.func,
@@ -78,6 +79,7 @@ class MapContainer extends Component {
       distanceFilter: 5,
     });
 
+    // TODO - take out default spray state
     setSpray({
       chemical_id: 0,
       chemical_flow: 2,
@@ -248,7 +250,7 @@ class MapContainer extends Component {
     if (this.state.currentAnnotationsSwath !== null) {
       annotations.push({...this.state.currentAnnotationsSwath});
     }
-    
+
     let trackingButton;
     let trackingButtonClass = 'tracking-button';
     if (this._isTracking()) {
@@ -320,6 +322,7 @@ const mapStateToProps = state => ({
   navigation: state.cardNavigation,
   location: state.location,
   spray: state.spray,
+  user: state.user,
 });
 
 export default connect(mapStateToProps, bindAction)(MapContainer);

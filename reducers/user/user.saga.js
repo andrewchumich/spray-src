@@ -11,12 +11,15 @@ const {
 
 function* login(action: UserAction) {
   try {
+    console.log(action);
     const token = yield UserService.login(action.payload);
-    yield put(loginSucceeded());
+    const user: User = yield UserService.getByUsername(action.payload.username);
+    yield put(loginSucceeded(user));
     yield put(pushRoute({
       key: ROUTES.map,
     }, 'global'));
   } catch (e) {
+    console.error('Login Failed:', e);
     yield put(loginFailed(e));
   }
 }

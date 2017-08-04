@@ -21,14 +21,18 @@ const BASE_CONFIG = {
 
 let TOKEN: ?Token = null;
 
-function setToken(t: Token) {
+export function getToken(): ?Token {
+  return TOKEN;
+}
+
+export function setToken(t: Token) {
   console.log(t);
   t.expires_time = (new Date).getTime() + t.expires_in * 1000;
   TOKEN = { ...t };
   return TOKEN;
 }
 
-function tokenIsValid(t: ?Token) {
+export function tokenIsValid(t: ?Token) {
   const current_time = (new Date).getTime();
   return (t !== null && typeof t === 'object' && t.expires_time && current_time > t.expires_time);
 }
@@ -56,10 +60,14 @@ export const OAuth2 = {
             ...config,
           }),
         }).then((res) => {
-          return res.json()
+          if (res.ok) {
+            return res.json()
+          } else {
+            return Promise.reject(res);
+          }
         }).then(
           (res) => {
-            resolve(setToken(res));
+              resolve(setToken(res));
           },
           (err) => {
             console.log(err);
@@ -68,5 +76,5 @@ export const OAuth2 = {
         );
       }
     });
-  }
+  },
 };

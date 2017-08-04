@@ -20,9 +20,9 @@
 */
 
 export type UserConfig = {
-  _id: number,
+  id: number,
   password?: string,
-  last_login?: Date,
+  last_login?: string,
   is_superuser: boolean,
   username: string,
   first_name: string,
@@ -30,13 +30,13 @@ export type UserConfig = {
   email: string,
   is_staff?: boolean,
   is_active: boolean,
-  date_joined?: Date,
+  date_joined?: string,
   groups: number[],
   user_permissions: any[],
 }
 
 const REQUIRED_PROPS = [
-  '_id',
+  'id',
   'is_superuser',
   'username',
   'first_name',
@@ -48,9 +48,9 @@ const REQUIRED_PROPS = [
 ];
 
 export class User {
-  _id: number;
+  id: number;
   password: string;
-  last_login: Date;
+  last_login: string;
   is_superuser: boolean;
   username: string;
   first_name: string;
@@ -58,7 +58,7 @@ export class User {
   email: string;
   is_staff: boolean;
   is_active: boolean;
-  date_joined: Date;
+  date_joined: string;
   groups: number[];
   user_permissions: any[];
 
@@ -68,7 +68,7 @@ export class User {
 
   constructor(config: UserConfig) {
     if (!this.isValidSectionConfig(config)) {
-      throw Error('User constructor invalid');
+      throw Error('User constructor invalid', config);
     } else {
       Object.assign(this, config);
     }

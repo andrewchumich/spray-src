@@ -1,5 +1,5 @@
 import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
-import { UserService } from './user.service';
+import { userService } from './user.service';
 import type { UserAction } from './user.reducer';
 import { setUser, loginRequested, loginSucceeded, loginFailed, LOGIN_REQUESTED } from './user.reducer';
 import { actions } from 'react-native-navigation-redux-helpers';
@@ -12,8 +12,8 @@ const {
 function* login(action: UserAction) {
   try {
     console.log(action);
-    const token = yield UserService.login(action.payload);
-    const user: User = yield UserService.getByUsername(action.payload.username);
+    const token = yield userService.login(action.payload);
+    const user: User = yield userService.getCurrent();
     yield put(loginSucceeded(user));
     yield put(pushRoute({
       key: ROUTES.map,

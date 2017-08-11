@@ -103,6 +103,7 @@ export function userReducer(state:UserState=initialState, action: UserAction=def
         ...state,
         loading: false,
         error: null,
+        user: action.payload,
       };
     case LOGIN_FAILED:
       return {

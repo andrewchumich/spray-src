@@ -11,7 +11,7 @@ export type Token = {
   scope: string,
   token_type: string,
   expires_time?: number,
-};
+} | null;
 
 // eventually this needs to be set by a sign in process
 const BASE_CONFIG = {
@@ -19,20 +19,23 @@ const BASE_CONFIG = {
   grant_type: 'password',
 };
 
-let TOKEN: ?Token = null;
+let TOKEN: Token = null;
 
-export function getToken(): ?Token {
+export function getToken(): Token {
   return TOKEN;
 }
 
-export function setToken(t: Token) {
+export function setToken(t: Token): Token {
+  if (!t) {
+    return t;
+  }
   console.log(t);
   t.expires_time = (new Date).getTime() + t.expires_in * 1000;
   TOKEN = { ...t };
   return TOKEN;
 }
 
-export function tokenIsValid(t: ?Token) {
+export function tokenIsValid(t: Token) {
   const current_time = (new Date).getTime();
   return (t !== null && typeof t === 'object' && t.expires_time && current_time > t.expires_time);
 }

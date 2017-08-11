@@ -21,7 +21,6 @@
 
 export type UserConfig = {
   id: number,
-  password?: string,
   last_login?: string,
   is_superuser: boolean,
   username: string,
@@ -30,7 +29,6 @@ export type UserConfig = {
   email: string,
   is_staff?: boolean,
   is_active: boolean,
-  date_joined?: string,
   groups: number[],
   user_permissions: any[],
 }
@@ -58,7 +56,6 @@ export class User {
   email: string;
   is_staff: boolean;
   is_active: boolean;
-  date_joined: string;
   groups: number[];
   user_permissions: any[];
 

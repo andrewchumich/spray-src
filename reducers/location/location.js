@@ -1,8 +1,10 @@
+/* @flow */
 import React from 'react';
 import { SET_LOCATION, START_SPRAYING, STOP_SPRAYING } from '../../actions/location';
 import {REHYDRATE} from 'redux-persist/constants'
-import { Section, SectionConfig, isValidSectionConfig } from './section';
-import { Position } from '../../utils';
+import { Section, isValidSectionConfig } from './section';
+import type { SectionConfig } from './section';
+import type { Position } from '../../utils';
 import { cloneDeep } from 'lodash';
 
 export type LocationState = {
@@ -89,7 +91,7 @@ export function locationReducer(state:LocationState=initialState, action=default
       };
     case STOP_SPRAYING:
       if (state.current !== null) {
-        const current_copy: Section  = cloneDeep(state.current);
+        const current_copy: Section = cloneDeep(state.current);
         current_copy.setEndTime();
         let list = {
           ...state.list,

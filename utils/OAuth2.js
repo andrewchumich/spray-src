@@ -46,8 +46,8 @@ export const OAuth2 = {
       return encodeURIComponent(key) + '=' + encodeURIComponent(data[key])
     }).join('&');
   },
-  getToken: function(config: LoginConfig) {
-    return new Promise((resolve, reject) => {
+  getToken: async function(config: LoginConfig) {
+    return await new Promise((resolve, reject) => {
       if (tokenIsValid(TOKEN)) {
         resolve(TOKEN);
       } else {

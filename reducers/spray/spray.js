@@ -14,6 +14,8 @@ export type SprayState = {
   weed_ids: number[],
   boom: ?BoomOrientation,
   boom_size: ?number,
+  user_id: number,
+  group_id: number,
 };
 
 export const SprayPropTypes = {
@@ -24,6 +26,8 @@ export const SprayPropTypes = {
   weed_ids: React.PropTypes.arrayOf(React.PropTypes.number),
   boom: React.PropTypes.string,
   boom_size: React.PropTypes.number,
+  user_id: React.PropTypes.number,
+  group_id: React.PropTypes.number,
 };
 
 const initialState: SprayState = {
@@ -34,6 +38,8 @@ const initialState: SprayState = {
   weed_ids: [],
   boom: null,
   boom_size: null,
+  user_id: -1,
+  group_id: -1,
 };
 
 export function sprayReducer(state:SprayState=initialState, action: Action) {

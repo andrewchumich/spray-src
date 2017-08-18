@@ -19,7 +19,7 @@ import { getToday, LocationPropTypes, getTodaysList, Section, LocationState } fr
 import { SprayPropTypes } from '../../reducers/spray';
 import type { SprayState } from '../../reducers/spray';
 import styles from './styles';
-import { Position } from '../../utils';
+import type { Position } from '../../utils';
 
 class MapContainer extends Component {
   static propTypes = {
@@ -64,12 +64,12 @@ class MapContainer extends Component {
   }
 
   componentDidMount() {
-    const { setSpray, location } = this.props;
+    const { setSpray, location, user } = this.props;
 
     // TODO - make this stop watching when not tracking to be more efficient
     this._watchId = navigator.geolocation.watchPosition((location) => {
       if (this._isTracking()) {
-        const p: Position = [location.coords.longitude, location.coords.latitude, location.coords.altitude];
+        const p: Position = [location.coords.longitude, location.coords.latitude, location.coords.altitude || 0];
         this._setLocation(p);
       }
     }, (error) => {
@@ -87,6 +87,8 @@ class MapContainer extends Component {
       weed_ids: [1, 3],
       boom: 'BOTH',
       boom_size: 15,
+      user_id: user.user.id,
+      group_id: user.user.groups[0] || 0,
     });
   }
 
@@ -325,4 +327,5 @@ const mapStateToProps = state => ({
   user: state.user,
 });
 
+// $FlowFixMe
 export default connect(mapStateToProps, bindAction)(MapContainer);

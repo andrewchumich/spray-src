@@ -1,3 +1,4 @@
+/* @flow */
 // type definitions for position types according to GeoJSON Specification: RFC 7946
 
 /**

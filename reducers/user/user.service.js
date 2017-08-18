@@ -23,15 +23,15 @@ class UserService extends BaseViewService {
     this.endpoint = USER_URL;
   }
 
-  login(options: LoginConfig) {
-    return OAuth2.getToken(options);
+  async login(options: LoginConfig) {
+    return await OAuth2.getToken(options);
   }
 
   /**
   * {id} - user id
   * {params} - query-string params
   */
-  async get(id: number, params: any) {
+  async get(id: number, params: any): Promise<User> {
     if (id === undefined || id === null) {
       throw Error('UserService::get -- id required');
     }
@@ -42,19 +42,19 @@ class UserService extends BaseViewService {
       url += '?' + queryString.stringify(params);
     }
 
-    return await(await fetchWrap(url, {
+    let user_data: UserConfig = await(await fetchWrap(url, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
       }
     })).json();
+
+    return new User(user_data);
   }
 
   async getCurrent(): Promise<User> {
     let url = API_ROOT + '/currentuser';
-
-    console.log(getToken());
 
     let user_data: UserConfig = await (await fetchWrap(url,  {
       method: 'GET',
@@ -63,8 +63,6 @@ class UserService extends BaseViewService {
         'Accept': 'application/json',
       }
     })).json();
-
-    console.log(user_data);
 
     return new User(user_data);
   }

@@ -11,7 +11,6 @@ const {
 
 function* login(action: UserAction) {
   try {
-    console.log(action);
     const token = yield userService.login(action.payload);
     const user: User = yield userService.getCurrent();
     yield put(loginSucceeded(user));

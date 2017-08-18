@@ -1,6 +1,7 @@
+/* @flow */
 import type { Action } from './types';
 import { Position } from '../reducers/location';
-import { SprayState } from '../reducers/spray';
+import type { SprayState } from '../reducers/spray';
 // constants
 export const SET_LOCATION = 'SET_LOCATION';
 export const START_SPRAYING = 'START_SPRAYING';

@@ -2,7 +2,7 @@
 import { API_ROOT } from '../../config';
 import type { Section } from './section';
 import type { LineString, Position } from '../../utils'
-import { OAuth2 } from '../../utils';
+import { fetchWrap } from '../../utils';
 import type { Token } from '../../utils';
 var moment = require('moment');
 
@@ -22,6 +22,8 @@ export function mapSectionToApi(section: Section) {
     weeds: section.weed_ids,
     // TODO - user id
     // TODO - group id
+    user: section.user_id,
+    group: section.group_id,
     start: moment(section.startTime).toISOString(),
     end: moment(section.endTime).toISOString(),
     linestring: getApiLineString(section.line),
@@ -45,17 +47,14 @@ export type SaveOptions = {
 
 function save(options: SaveOptions) {
   const URL = API_ROOT + '/spraysections';
-  return OAuth2.getToken().then((t: Token) => {
-    const post_data = {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + t.access_token,
-      },
-      body: JSON.stringify(mapSectionToApi(options.section))
-    };
-    console.log(post_data);
-    return fetch(URL, post_data).then((response) => response.json());
-  });
+  const post_data = {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(mapSectionToApi(options.section))
+  };
+
+  return fetchWrap(URL, post_data);
 }

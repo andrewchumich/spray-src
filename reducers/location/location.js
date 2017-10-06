@@ -67,7 +67,6 @@ export function locationReducer(state:LocationState=initialState, action=default
       if (state.current !== null && state.current instanceof Section) {
         state.current.addPosition(p);
       }
-      console.log({...state});
       return {
         ...state,
       };
